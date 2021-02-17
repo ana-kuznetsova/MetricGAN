@@ -60,8 +60,8 @@ random.seed(999)
 TargetMetric='pesq' # It can be either 'pesq' or 'stoi' for now. Of course, it can be any arbitary metric of interest.
 Target_score=np.asarray([1.0]) # Target metric score you want generator to generate. s in e.q. (5) of the paper.
 
-output_path='Your path to output directory'
-PESQ_path='Your path to PESQ'
+output_path='/data/anakuzne/experiments/metric_gan'
+PESQ_path='/data/anakuzne/experiments/metric_gan/pesq_res'
 
 
 GAN_epoch=200
@@ -233,13 +233,13 @@ def Corresponding_clean_list(file_list):
         
 
 #########################  Training data #######################
-print 'Reading path of training data...'
+print('Reading path of training data...')
 Train_Clean_path='Path to the directory of clean speech/Train/'
 Generator_Train_Noisy_paths = get_filepaths("Path to the directory of noisy speech/Train")
 # Data_shuffle
 random.shuffle(Generator_Train_Noisy_paths)
 ######################### validation data #########################
-print 'Reading path of validation data...'
+print('Reading path of validation data...')
 Test_Clean_path ='Path to the directory of clean speech/Test/'
 Generator_Test_Noisy_paths = get_filepaths("Path to the directory of noisy speech/Test") 
 # Data_shuffle
@@ -250,7 +250,7 @@ random.shuffle(Generator_Test_Noisy_paths)
 start_time = time.time()
 ######## Model define start #########
 #### Define the structure of Generator (speech enhancement model)  ##### 
-print ('Generator constructuring...')
+print('Generator constructuring...')
 de_model = Sequential()
 
 de_model.add(Bidirectional(LSTM(200, return_sequences=True), merge_mode='concat', input_shape=(None, 257))) #dropout=0.15, recurrent_dropout=0.15
@@ -265,7 +265,7 @@ de_model.add(Activation('sigmoid'))
 
 
 #### Define the structure of Discriminator (surrogate loss approximator)  ##### 
-print ('Discriminator constructuring...')
+print('Discriminator constructuring...')
 
 _input = Input(shape=(257,None,2))
 _inputBN = BatchNormalization(axis=-1)(_input)
@@ -336,7 +336,7 @@ for gan_epoch in np.arange(1, GAN_epoch+1):
     random.shuffle(Generator_Train_Noisy_paths)
     g1 = Generator_train_data_generator(Generator_Train_Noisy_paths[0:num_of_sampling])
              
-    print 'Generator training (with discriminator fixed)...' 
+    print('Generator training (with discriminator fixed)...') 
     if gan_epoch>=2:                
         Generator_hist = MetricGAN.fit_generator(g1, steps_per_epoch=num_of_sampling, 
         					         epochs=1,
@@ -346,7 +346,7 @@ for gan_epoch in np.arange(1, GAN_epoch+1):
                                     )
 
     # Evaluate the performance of generator in a validation set.
-    print 'Evaluate G by validation data ...'    
+    print('Evaluate G by validation data ...')    
     Test_enhanced_Name=[]
     utterance=0
     for path in Generator_Test_Noisy_paths[0:num_of_valid_sample]:   
@@ -374,12 +374,12 @@ for gan_epoch in np.arange(1, GAN_epoch+1):
               
     # Calculate True STOI    
     test_STOI=read_batch_STOI(Test_Clean_path, Test_enhanced_Name)     
-    print np.mean(test_STOI)    
+    print(np.mean(test_STOI))    
     Test_STOI.append(np.mean(test_STOI))
        
     # Calculate True PESQ    
     test_PESQ=read_batch_PESQ(Test_Clean_path, Test_enhanced_Name)         
-    print np.mean(test_PESQ)*5.-0.5  
+    print(np.mean(test_PESQ)*5.-0.5)  
     Test_PESQ.append(np.mean(test_PESQ)*5.-0.5)
     
     # Plot learning curves
@@ -404,7 +404,7 @@ for gan_epoch in np.arange(1, GAN_epoch+1):
     # save the current SE model
     de_model.save('current_SE_model.h5')     
                                					
-    print 'Sample training data for discriminator training...'
+    print('Sample training data for discriminator training...')
     D_paths=Generator_Train_Noisy_paths[0:num_of_sampling]
       
     Enhanced_name=[]
@@ -439,7 +439,7 @@ for gan_epoch in np.arange(1, GAN_epoch+1):
         
     Co_clean_list=Corresponding_clean_list(D_paths) # List of true data (Clean speech)
        
-    print 'Discriminator training...'                            
+    print('Discriminator training...')                            
     ## Training for current list
     Current_Discriminator_training_list=current_sampling_list+Co_clean_list
     random.shuffle(Current_Discriminator_training_list)
@@ -482,4 +482,4 @@ for gan_epoch in np.arange(1, GAN_epoch+1):
     shutil.rmtree(output_path+'/temp') # to save harddisk memory
    
 end_time = time.time()
-print ('The code for this file ran for %.2fm' % ((end_time - start_time) / 60.))
+print('The code for this file ran for %.2fm' % ((end_time - start_time) / 60.))
