@@ -35,7 +35,7 @@ import matplotlib.pyplot as plt
 from tensorflow.keras.models import Sequential, model_from_json, Model, load_model
 from tensorflow.keras.layers import Dense, Dropout, Flatten, Activation, SpatialDropout2D, Reshape, Lambda
 from tensorflow.keras.layers import BatchNormalization
-from tensorflow.keras.layers.advanced_activations import ELU, PReLU, LeakyReLU
+from tensorflow.keras.layers import ELU, PReLU, LeakyReLU
 from tensorflow.keras.optimizers import SGD, Adam
 from tensorflow.keras.callbacks import ModelCheckpoint
 from tensorflow.keras import backend as K
