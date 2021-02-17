@@ -39,7 +39,7 @@ from keras.layers.advanced_activations import ELU, PReLU, LeakyReLU
 from keras.optimizers import SGD, Adam
 from keras.callbacks import ModelCheckpoint
 from keras import backend as K
-from keras.layers import LSTM, TimeDistributed, Bidirectional, dot, Input, Concatenate, Multiply, Subtract, Maximum
+from tensorflow.keras.layers import LSTM, TimeDistributed, Bidirectional, dot, Input, Concatenate, Multiply, Subtract, Maximum
 from keras.layers.pooling import GlobalAveragePooling2D
 from joblib import Parallel, delayed
 from SpectralNormalizationKeras import DenseSN, ConvSN1D, ConvSN2D, ConvSN3D
