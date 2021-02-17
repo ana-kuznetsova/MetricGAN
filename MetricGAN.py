@@ -40,7 +40,7 @@ from tensorflow.keras.optimizers import SGD, Adam
 from tensorflow.keras.callbacks import ModelCheckpoint
 from tensorflow.keras import backend as K
 from tensorflow.keras.layers import LSTM, TimeDistributed, Bidirectional, dot, Input, Concatenate, Multiply, Subtract, Maximum
-from tensorflow.keras.layers.pooling import GlobalAveragePooling2D
+from tensorflow.keras.layers import GlobalAveragePooling2D
 from joblib import Parallel, delayed
 from SpectralNormalizationKeras import DenseSN, ConvSN1D, ConvSN2D, ConvSN3D
 from pystoi.stoi import stoi
