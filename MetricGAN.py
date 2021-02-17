@@ -234,14 +234,14 @@ def Corresponding_clean_list(file_list):
 
 #########################  Training data #######################
 print('Reading path of training data...')
-Train_Clean_path='Path to the directory of clean speech/Train/'
-Generator_Train_Noisy_paths = get_filepaths("Path to the directory of noisy speech/Train")
+Train_Clean_path='/data/anakuzne/voicebank-demand/clean_trainset_28spk_wav'
+Generator_Train_Noisy_paths = get_filepaths("/data/anakuzne/voicebank-demand/noisy_trainset_28spk_wav")
 # Data_shuffle
 random.shuffle(Generator_Train_Noisy_paths)
 ######################### validation data #########################
 print('Reading path of validation data...')
-Test_Clean_path ='Path to the directory of clean speech/Test/'
-Generator_Test_Noisy_paths = get_filepaths("Path to the directory of noisy speech/Test") 
+Test_Clean_path ='/data/anakuzne/voicebank-demand/clean_testset_wav'
+Generator_Test_Noisy_paths = get_filepaths("/data/anakuzne/voicebank-demand/noisy_testset_wav") 
 # Data_shuffle
 random.shuffle(Generator_Test_Noisy_paths)
 ################################################################
