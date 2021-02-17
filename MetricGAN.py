@@ -32,15 +32,15 @@ import matplotlib
 # Force matplotlib to not use any Xwindows backend.
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from keras.models import Sequential, model_from_json, Model, load_model
-from keras.layers.core import Dense, Dropout, Flatten, Activation, SpatialDropout2D, Reshape, Lambda
-from keras.layers.normalization import BatchNormalization
-from keras.layers.advanced_activations import ELU, PReLU, LeakyReLU
-from keras.optimizers import SGD, Adam
-from keras.callbacks import ModelCheckpoint
-from keras import backend as K
+from tensorflow.keras.models import Sequential, model_from_json, Model, load_model
+from tensorflow.keras.layers.core import Dense, Dropout, Flatten, Activation, SpatialDropout2D, Reshape, Lambda
+from tensorflow.keras.layers.normalization import BatchNormalization
+from tensorflow.keras.layers.advanced_activations import ELU, PReLU, LeakyReLU
+from tensorflow.keras.optimizers import SGD, Adam
+from tensorflow.keras.callbacks import ModelCheckpoint
+from tensorflow.keras import backend as K
 from tensorflow.keras.layers import LSTM, TimeDistributed, Bidirectional, dot, Input, Concatenate, Multiply, Subtract, Maximum
-from keras.layers.pooling import GlobalAveragePooling2D
+from tensorflow.keras.layers.pooling import GlobalAveragePooling2D
 from joblib import Parallel, delayed
 from SpectralNormalizationKeras import DenseSN, ConvSN1D, ConvSN2D, ConvSN3D
 from pystoi.stoi import stoi
