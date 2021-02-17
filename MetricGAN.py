@@ -270,16 +270,16 @@ print('Discriminator constructuring...')
 _input = Input(shape=(257,None,2))
 _inputBN = BatchNormalization(axis=-1)(_input)
 
-C1=ConvSN2D(15, (5,5), padding='valid',  data_format='channels_last') (_inputBN)
+C1=ConvSN2D(15, (5,5), padding='valid',  data_format='channels_last')(_inputBN)
 C1=LeakyReLU()(C1)
 
-C2=ConvSN2D(25, (7,7), padding='valid',  data_format='channels_last') (C1)
+C2=ConvSN2D(25, (7,7), padding='valid',  data_format='channels_last')(C1)
 C2=LeakyReLU()(C2)
 
-C3=ConvSN2D(40, (9,9), padding='valid',  data_format='channels_last') (C2)
+C3=ConvSN2D(40, (9,9), padding='valid',  data_format='channels_last')(C2)
 C3=LeakyReLU()(C3)
 
-C4=ConvSN2D(50, (11,11), padding='valid',  data_format='channels_last') (C3)
+C4=ConvSN2D(50, (11,11), padding='valid',  data_format='channels_last')(C3)
 C4=LeakyReLU()(C4)
 
 Average_score=GlobalAveragePooling2D(name='Average_score')(C4)  #(batch_size, channels)
